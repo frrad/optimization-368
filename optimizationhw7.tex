@@ -1,0 +1,135 @@
+\documentclass[12pt]{article}
+\setlength\headheight{14.5pt}
+\title{Homework}
+\author{Frederick Robinson}
+\date{23 February 2010}
+\usepackage{amsfonts}
+\usepackage{fancyhdr}
+\usepackage{amsthm}
+\pagestyle{fancyplain}
+
+\begin{document}
+
+
+
+\lhead{Frederick Robinson}
+\rhead{Math 368: Optimization}
+
+   \maketitle
+
+\setcounter{tocdepth}{2} 
+
+%\tableofcontents
+
+\section{Book Problems}
+
+\subsection{Problem 9.4.4}
+\subsubsection{Question}
+State the dual problem of Exercise 12 in Section 9.3
+\subsubsection{Answer}
+
+\[\begin{array}{lrrrr}
+\mathrm{Minimize } & 28 y_1 & + 16 y_2  &+ 12 y_3 \\
+\mathrm{Subject\ to} & y_1 &+ 2 y_2& &\geq 2 \\
+ &2 y_1&& + y_3 & \geq 5\\
+&&4y_2 &+ y_3& \geq 3\\
+\mathrm{and\ } y_1\geq 0 , y_2 \geq 0, y_3 \geq 0\\
+\end{array}\]
+
+
+\subsection{Problem 9.4.8}
+\subsubsection{Question}
+Use the final tableau in the solution of Exercise 12 in Section 9.3 to solve its dual.
+\subsubsection{Answer}
+
+Recall  that
+\[\left[\begin{array}{lll|lll|l}
+x_1& x_2&x_3&s_1& s_2 & s_3 & \\
+\hline 
+1 & 0 &0&\frac{1}{2}&\frac{1}{4}&-1&6\\
+0&0&1&-\frac{1}{4}&\frac{1}{8}&\frac{1}{2}&1\\
+0&1&0&\frac{1}{4}&-\frac{1}{8}&\frac{1}{2}&11\\
+\hline
+0&0&0&\frac{3}{2}&\frac{1}{4}&2&70
+\end{array}\right]
+\]
+is the tableau of the final solution from last week. Thus, we see by inspection that the solution to the dual problem is just
+\[ g\left(\frac{3}{2},\frac{1}{4},2\right) = 70.\]
+
+It is easy to check that these values do indeed satisfy the constraints from above.
+
+\subsection{Problem 9.4.10abc}
+\subsubsection{Question}
+Mark each statement True or False, and justify each answer.
+\begin{enumerate}
+\item The dual of the dual problem is the original problem.
+\item If either the primal or the dual problem has an optimal solution, then they both do.
+\item If the primal problem has an optimal solution, then the final tableau in the simplex method also gives the optimal solution of the dual problem.
+\end{enumerate}
+\subsubsection{Answer}
+\begin{enumerate}
+\item \emph{True.} In fact on Page 46 of the book it states explicitly ``So the dual of the dual problem is the original primal problem."
+\item \emph{False} Assuming that both feasible sets are nonempty this is just the Duality Theorem and therefore true. This is however false in the case that one of the feasible sets is empty.
+\item \emph{True} The continuation of the Duality Theorem from Page 48 states ``If either $P$ or $P^*$ is solved by the simplex method, then the solution of its dual is displayed in the bottom row of the final tableau in the columns associated with the slack variables. "
+\end{enumerate}
+
+
+\subsection{Problem 9.4.12}
+\subsubsection{Question}
+Use the simplex method to solve the dual, and from this solve the original problem.
+\[
+\begin{array}{lrrrr}
+\mathrm{Minimize}  &10 x_1  &+ 14 x_2\\
+\mathrm{subject\ to} & x_1 &+ 2 x_2 & \geq 3\\
+&2 x_1 &+ x_2 &\geq 4\\
+& 3x_1 & x_2 & \geq2\\
+\mathrm{and\ }x_1\geq0, x_2 \geq 0
+\end{array}
+\]
+\subsubsection{Answer}
+First we observe that the dual to this problem is just the following
+\[
+\begin{array}{lrrrr}
+\mathrm{Maximize} & 3 y_1 &+ 4 y_2 &+ 2 y_3\\
+\mathrm{subject\ to} & y_1 &+ 2 y_2 &+ 3 y_3& \leq 10\\
+&2 y_1 &+ y_2 &+ y_3& \leq 14\\
+\mathrm{and\ }y_1\geq0, y_2 \geq 0 , y_3 \geq 0
+\end{array}
+\]
+
+So we can set up the tableau for the dual problem as 
+
+\[ \left[ \begin{array}{ccc|cc|c}
+y_1 & y_2 & y_3 & s_1 & s_2  & \\
+\hline
+1&2&3&1&& 10\\
+2&1&1&&1&14\\
+\hline
+-3&-4&-2&&&0
+\end{array}\right]
+\cong
+ \left[ \begin{array}{ccc|cc|c}
+y_1 & y_2 & y_3 & s_1 & s_2  & \\
+\hline
+\frac{1}{2}&1&\frac{3}{2}&\frac{1}{2}&0& 5\\
+\frac{3}{2}&0&-\frac{1}{2}&-\frac{1}{2}&1&9\\
+\hline
+-1&0&4&2&0&20
+\end{array}\right]
+\]
+\[ \cong
+ \left[ \begin{array}{ccc|cc|c}
+y_1 & y_2 & y_3 & s_1 & s_2  & \\
+\hline
+\frac{1}{2}&1&\frac{3}{2}&\frac{1}{2}&0& 5\\
+1&0&-\frac{1}{3}&-\frac{1}{3}&\frac{2}{3}&6\\
+\hline
+0&0&\frac{11}{3}&\frac{5}{3}&\frac{2}{3}&26
+\end{array}\right]
+\]
+So, we see by inspection that the solution to the dual problem is
+\[ g\left( 6,5,0 \right) = 26 .\]
+Moreover, the solution to the dual of the dual problem --- and therefore to the original problem is just 
+\[f\left( \frac{5}{3} , \frac{2}{3} \right) = 26.\]
+A quick check verifies that this does indeed satisfy the constraints to the original problem.
+\end{document}

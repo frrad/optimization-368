@@ -1,0 +1,134 @@
+\documentclass[12pt]{article}
+\setlength\headheight{14.5pt}
+\title{Homework}
+\author{Frederick Robinson}
+\date{1 February 2010}
+\usepackage{amsfonts}
+\usepackage{fancyhdr}
+\usepackage{amsthm}
+\pagestyle{fancyplain}
+
+\begin{document}
+
+
+
+\lhead{Frederick Robinson}
+\rhead{Math 368: Optimization}
+
+   \maketitle
+
+\setcounter{tocdepth}{2} 
+
+\tableofcontents
+
+\section{Chapter 7}
+\subsection{Problem 1}
+\subsubsection{Question}
+Define $f:\mathbb{R}^2 \to \mathbb{R}$ by $f(x,y) = a x^2 + b y^2 + 2 c x y + d$. For what values of $a$, $b$, $c$, and $d$ is $f$ concave? 
+\subsubsection{Answer}
+Instead of computing the answer directly from the definition concavity we will employ the result of Theorem 7.10 to check concavity from the derivatives of the function. This is a valid application of the Theorem since indeed the above function $f$ is $C^2$ for any choice of $a, b, c, d$.  Moreover, since the result holds for arbitrary open convex subsets of $\mathbb{R}^2$ we can use the information gained by this test to determine whether $f$ is concave on all of $\mathbb{R}^2$ since in particular a function $f$ is concave on $\mathbb{R}^2$ if and only if it is concave on every open convex subset thereof. 
+
+So we compute the Hessian matrix corresponding to $f$ as 
+\[\left[ \begin{array}{lr } 
+\frac{\partial^2 f}{\partial x^2} & \frac{\partial^2 f}{\partial x \partial y} \\
+\frac{\partial^2 f}{\partial y \partial x}&\frac{\partial^2 f}{\partial y^2}
+ \end{array} \right]
+ =
+ \left[ \begin{array}{lr } 
+2 a & 2 c \\
+2 c & 2 b
+ \end{array} \right]
+ .\]
+Next we observe that the eigenvalues associated with this matrix are $a+b-\sqrt{a^2-2 a b+b^2+4 c^2}$ and $a+b+\sqrt{a^2-2 a b+b^2+4 c^2}$. So the Hessian is negative semidefinite and $f$ is concave if and only if these are both nonpositive. In particular since the quantity under the square root is always positive it must be that $a+b \leq 0$ and $(a-b)^2+4 c^2 \leq (a+b)^2 \Leftrightarrow c^2 \leq ab$. So we have established necessary and sufficient conditions for $f$ to be concave as desired.
+\[c^2\leq ab \quad \mathrm{ and} \quad a+b\leq 0\]
+
+
+\subsection{Problem 2}
+\subsubsection{Question}
+Let $f: \mathbb{R}_{++}^n \to \mathbb{R}$ be defined by
+\[ f(x_1,\dots , x_n) = \log(x_1^\alpha \cdots x_n^\alpha)\]
+where $\alpha>0$. Is $f$ concave?
+\subsubsection{Answer}
+First observe that we can express $f$ in the following manner
+\[ f(x_1,\dots , x_n) = \log(x_1^\alpha \cdots x_n^\alpha) = \log((x_1 \cdots x_n)^\alpha) =\alpha \log(x_1 \cdots x_n)\]
+Since $\alpha>0$ we have $ \log(x_1 \cdots x_n)$ is concave if and only if  $\alpha \log(x_1 \cdots x_n)$ is. Thus, it should be clear by inspection now that $f$ is indeed concave. More formally however, let $\vec{y}, \vec{x}\in\mathbb{R}^n$ and $\lambda \in (0,1)$
+\[\lambda f(x) + (1-\lambda)f(y) = \lambda \log(x_1 x_2 \dots) + (1-\lambda ) \log(y_1 y_2 \dots)\]
+\[=  \log(x_1^ \lambda x_2^ \lambda \dots x_n^\lambda y_1^{(1-\lambda )} y_2^{(1-\lambda )}\dots y_n^{(1-\lambda)})=  \log(x_1^ \lambda  y_1^{(1-\lambda )}  x_2^ \lambda y_2^{(1-\lambda )} \dots x_n^\lambda y_n^{(1-\lambda)}) \]
+\[\geq \log((\lambda x_1 + (1-\lambda)y_1)(\lambda x_2 + (1-\lambda)y_2)\dots(\lambda x_n + (1-\lambda)y_n)) \]
+Since each $x_i^\lambda y_i^{(1-\lambda)}\geq \lambda x_i + (1-\lambda) y_i$. So $\log(x_1 x_2 \dots)$ is concave by definition.
+
+\subsection{Problem 15}
+\subsubsection{Question}
+Describe a set of conditions on the parameters $p$ and $I$ under which the budget set $\mathcal{B}(p,I)$ of the utility-maximization problem of subsection 2.3.1 meets Slater's condition.
+\subsubsection{Answer}
+Slater's condition is met if there exists some possible point for which each of the constraints is slack. In the context of the particular problem presented in subsection 2.3.1 the (only) constraint is in particular
+\[\vec{p}\cdot \vec{x} \leq I\]
+That is, the dot product of the consumption bundle vector with the price vector must be less than or equal to the income. So, as long as $I$ is nonzero Slater's condition is met since the empty bundle always causes the price constraint to be slack. 
+
+\subsection{Problem 20}
+\subsubsection{Question}
+A firm produces an output $y$ using two inputs $x_1$ and $x_2$ as $y = \sqrt{x_1 x_2}$. The firm is obligated to use at least one unit of $x_1$ in its production process. The input prices of $x_1$ and $x_2$ are given by $w_1$ and $w_2$, respectively. Assume that the firm wishes to minimize the cost of producing $\overline{y}$ units of output.
+\begin{enumerate}
+\item Set up the firm's cost-minimization problem. Is the feasible set closed? compact? convex?
+\item Describe the Kuhn-Tucker first-order conditions. Are they sufficient for a solution? Why or why not?
+\item Find a solution of the first-order conditions. What conditions on the parameters make $x_1^*=1$  a solution of the first order conditions? When is $x_1^* \neq 1$?
+\end{enumerate}
+\subsubsection{Answer}
+\begin{enumerate}
+\item The firm wishes to minimize $w_1 x_1 + w_2 x_2$ subject to $x_1 \geq 1$ and $\overline{y}  \leq \sqrt{x_1 x_2} \Leftrightarrow \overline{y}^2 \leq  x_1 x_2$ for some constant $\overline{y} > 0$. So, the feasible set is closed, as it contains its limit points of the form $\overline{y}^2 = x_1 x_2 $ and $x_1 =1$. However, it is not bounded and is therefore not compact. The set is convex however since it is the intersection of two convex sets: $x_1\geq 1$ and $x_1 x_2 \geq.\overline{y}^2$
+
+Now we check
+\begin{enumerate}
+\item $f=\sqrt{x_1 x_2}$ is a concave function 
+\item $\{(x_1,x_2)\ |\ x_1\geq 1\}$ is open and convex 
+\item  $x_1 x_2 = \overline{y}^2$ is concave
+\item There exists some $x_1, x_2$ such that $x_1 x_2 \geq \overline{y}^2$
+\end{enumerate}
+So we can use the Kuhn-Tucker method.
+
+In particular we get the Lagrangian as 
+\[L=-w_1 x_1 -w_2 x_2 + \lambda_1(x_1 x_2 - \overline{y}^2 ) +\lambda_2(x_1 -1) \]
+ 
+\item The first order Kuhn-Tucker conditions are
+\[Df(x^*) + \sum_{i=1}^l \lambda_i^* Dh_i (x^*) = 0\]
+and
+\[ \lambda^* \geq 0, \quad \sum_{i=1}^l \lambda_i^* h_i(x^*) = 0.\]
+They are sufficient since the constraints are all concave. They are necessary since the problem satisfies Slater's condition.
+\item We can solve the problem now by using these constraints. Solutions must satisfy the following equations
+\[-w_1-w_2+\lambda_1^*+\lambda_2^*=0\]
+and
+\[0=\lambda^*_1 (x_1^* x_2^*-\overline{y}^2)+ \lambda^*_2(x_1^* -1)\]
+as well as the conditions
+\[ Df(x)+ \lambda_i Dh_i(x) = 0 \]
+
+Thus the optimization problem is solved by 
+\[x_1 = \max{\left\{\overline{y} \sqrt{\frac{w_2}{w_1}},1\right\}}  \quad \mathrm{and}\quad x_2=\frac{\overline{y}^2 }{x_1}\]
+\end{enumerate}
+
+
+\section{Chapter 8}
+\subsection{Problem 4}
+\subsubsection{Question}
+Let $f_1, \dots f_l$ be functions mapping $\mathcal{D} \subset \mathbb{R}^n$ into $\mathbb{R}$, where $\mathcal{D}$ is convex. Let $a_1,\dots, a_l$ be nonnegative numbers. Show that if for each $i \in \{1,\dots,l\}$, $f_i$ is concave, then so is $f$, where $f$ is defined by 
+\[f(x)= \sum_{i=1}^l a_i f_i(x), \quad x \in \mathcal{D}.\]
+Give an example to show that if each $f_i$ is only quasi-concave, then $f$ need not be quasi-concave.
+\subsubsection{Answer}
+Fix some $x,y \in \mathcal{D}$ and $\lambda \in (0,1)$. Since each $f_i$ is concave and each $a_i$ is nonnegative we know that 
+\[f_i[\lambda x + (1-\lambda)y]\geq \lambda f_i(x) + (1-\lambda) f_i(y)\]
+and so clearly $f(x)$ inherits this property as 
+\[ f[\lambda x + (1-\lambda)y] = \sum_{i=1}^l a_i f_i[\lambda x + (1-\lambda)y]   \]
+\[  \geq \sum_{i=1}^l a_i ( \lambda f_i(x) + (1-\lambda)f_i(y)) = \lambda f(x) + (1-\lambda)f(y) \]
+
+This is not true for merely quasi-concave functions however. We know for example that the functions 
+\[f_1(x,y)=\min\{ x^2, (x-4)^2 \} \quad \mathrm{and}\quad f_2(x,y)=\min\{ y^2, (y-4)^2 \} \]
+are both quasiconcave on $[0,4] \times [0,4]$ however the sum $f_1+f_2$ is not quasiconcave since level sets of this function are not convex. This is easy to see if you consider that such level sets are symmetric about the lines $y=2$ and $x=2$ both and the points on a given level set which are furthest from $(2,2)$ (the center of each level set by symmetry) occur along these lines.
+
+\subsection{Problem 8}
+\subsubsection{Question}
+Show that the function $f:\mathcal{D} \subset \mathbb{R}^2 \to \mathbb{R}$ defined by $f(x,y)= x y $ is quasi-concave if $\mathcal{D} = \mathbb{R}_+^2$, but not if $\mathcal{D} = \mathbb{R}^2$.
+\subsubsection{Answer}
+The function $f:\mathcal{D} \subset \mathbb{R}^2 \to \mathbb{R}$ defined by $f(x,y)= x y $ is quasi-concave if $\mathcal{D} = \mathbb{R}_+^2$ since given $x$ and $y$ in the first quadrant $f(\lambda x + (1-\lambda)y) = \lambda^2 x + 2 \lambda (1 - \lambda) x y + (1-\lambda)^2y^2 \geq \min(x^2,y^2) $ given any choice of $\lambda$. 
+
+However if we cease to restrict our attention to the first quadrant this is no longer the case. Take the points $(0,1)$ and $(0,-1)$ with $\lambda = .5$. In this case $0^2 = 0 < \min(1^2,1^2)$ so the function is not quasi-concave. 
+
+\end{document}

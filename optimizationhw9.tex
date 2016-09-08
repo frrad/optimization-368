@@ -1,0 +1,141 @@
+\documentclass[12pt]{article}
+\setlength\headheight{14.5pt}
+\title{Homework}
+\author{Frederick Robinson}
+\date{8 March 2010}
+\usepackage{amsfonts}
+\usepackage{fancyhdr}
+\usepackage{amsthm}
+\pagestyle{fancyplain}
+
+\input xy 
+\xyoption{all} 
+
+
+\begin{document}
+
+
+
+\lhead{Frederick Robinson}
+\rhead{Math 368: Optimization}
+
+   \maketitle
+
+\setcounter{tocdepth}{2} 
+
+\tableofcontents
+
+
+
+\section{Problem 11.3}
+\subsection{Question}
+ Redo the consumer’s multiperiod utility maximization problem of Section 11.6 with $u (c) = c^{\frac{1}{3}}$. (cf. 11: 1a)
+\subsection{Answer}
+
+As in Section 11.6 we have a consumer faced with a $T$-period planning horizon. where $T$ is a finite positive integer. He has initial wealth $w \in \mathbb{R}_+$. We say that he begins period-$t$ with a wealth $w_t$, and consumes $c_t$ $(w_t \geq c_t \geq0)$ and begins the the next period with $(w_t-c_t)(1+r)$, where $r\geq0$ is the interest rate. 
+
+In unlike in the example however we have that the consumption of $c$ in any period give a utility of $u(c) = c^{\frac{1}{3}}$. 
+
+For the purposes of this problem the state space $S$ will be the set of possible wealth levels ($\mathbb{R}_+$) and the action space $A$ will be the set of consumption levels (again $\mathbb{R}_+$). The reward function is just $r_t(w,c)=u(c) = c^\frac{1}{3}$. The transition function $f_t$ is $f_t(w,c)=(w-c)(1+r)$. Finally we have the feasible action correspondence $\Phi_t(w)=[0,w]$ for all $w$.
+
+We shall let $k=(1+r)$ as in the book for ease of notation. In the last period, given a wealth level $w$ the consumer solves:
+\[\max_{c\in [0,w]}{u(c)}.\]
+But, clearly since $u(c)$ is strictly increasing the the unique solution for any given $w$ is to consume everything. hence we conclude that the (unique) optimal strategy for one time period is just $g_T(w)=w$ for all $w \in S$ and the one period value function is given by
+\[V_T(w) = w^\frac{1}{3},\quad w \in S. \]
+
+Now we consider the case of two periods. In this case we need to maximize the reward function by solving
+\[\max_{c \in [0,w]}{\{c^\frac{1}{3}+ \left(k(w-c)\right)^\frac{1}{3} \}}.\]
+Since this optimization problem is strictly convex we can just employ first order conditions. Thus we see we must have
+\[ \frac{\partial}{\partial c} \left( c^{1/3}+(k (-c+w))^{1/3} \right) = \frac{1}{3 c^{2/3}}-\frac{k}{3 (k (-c+w))^{2/3}} = 0 \]
+\[ \Rightarrow c = \frac{-w-\sqrt{k} w}{-1+k} \quad \mathrm{or} \quad c = \frac{-w+\sqrt{k} w}{-1+k}\]
+however this first solution may be discarded since for $w, k$ in the appropriate ranges, this solution corresponds to negative $c$. So, the corresponding value function is just 
+\[ V(w)=\left(\frac{w}{1+\sqrt{k}}\right)^{1/3}\left(1+\sqrt{k}\right) = w^{1/3}\left(1+\sqrt{k}\right)^{2/3} \]
+
+Now we can compute again for the three-period problem. In this case we must solve the following optimization problem.
+\[\max_{c \in [0,w]} \left\{  \underbrace{\left( k^2 ( w - c)  \right)^{1/3}}_{\mathrm{Period\ 3}}+ \underbrace{\left(\frac{c}{1+\sqrt{k}}\right)^{1/3}\left(1+\sqrt{k}\right)}_{\mathrm{Periods\ 1\ \&\ 2}} \right\} .\]
+again applying first order conditions we see that
+\[ \frac{\partial}{\partial c} \left( \left(\frac{c}{1+\sqrt{k}}\right)^{1/3}\left(1+\sqrt{k}\right)+\left(k^2(w-c)\right)^{1/3} \right)  \]
+\[=\frac{1}{3 \left(\frac{c}{1+\sqrt{k}}\right)^{2/3}}-\frac{k^2}{3 \left(k^2 (-c+w)\right)^{2/3}} = 0\]
+\[ \Rightarrow c=  \frac{w+\sqrt{k} w}{1+\sqrt{k}+k} \]
+and 
+\begin{eqnarray*}V(w) &=& \left( k^2 ( w - \frac{w+\sqrt{k} w}{1+\sqrt{k}+k})  \right)^{1/3} +\left(\frac{w+\sqrt{k} w}{(1+\sqrt{k}+k) (1+\sqrt{k})} \right)^{1/3}\left(1+\sqrt{k}\right)\\
+ &=& \left( k^2 ( w - \frac{w+\sqrt{k} w}{1+\sqrt{k}+k})  \right)^{1/3} +\left(\frac{(w+\sqrt{k} w)  (1+\sqrt{k})^2}{(1+\sqrt{k}+k)} \right)^{1/3}  \\
+ &=& \left(\frac{\left(1+\sqrt{k}\right)^3 w}{1+\sqrt{k}+k}\right)^{1/3}+\left(\frac{k^3 w}{1+\sqrt{k}+k}\right)^{1/3}\\
+&=& \frac{\left(1+\sqrt{k}\right) w^{1/3}+k w^{1/3}}{(1+\sqrt{k}+k)^{1/3}} = \left(1+\sqrt{k} +k \right)^{2/3} w^{1/3} \end{eqnarray*}
+
+So, it seems likely that in general we have the relations
+\[V_T(w) = \left(1+\sqrt{k}+\cdots+k^{T/2}\right)^{2/3} w^{1/3}\]
+and
+\[g_T(w) =w \left( \frac{1+\sqrt{k}+ \cdots +k^{(T-1)/2}}{1+\sqrt{k}+ \cdots +k^{T/2}} \right) \]
+
+We will use induction to prove this relation.
+
+If we assume that the above is true for $T=n$ we can compute the case corresponding to $T=n+1$ fairly by the following optimization: 
+\[\max_{c\in[0,w]}\left( \left( (w-c)k^{n+1} \right)^{1/3} + \left(1+\sqrt{k}+\cdots+k^{n/2}\right)^{2/3} c^{1/3} \right) \]
+again, as the above is a convex optimization we can just apply first order conditions.
+\[ \frac{\partial }{\partial c} \left(\left( (w-c)k^{n+1} \right)^{1/3}  + \left(1+\sqrt{k}+\cdots+k^{n/2}\right)^{2/3} c^{1/3} \right)\]
+\[ = -\frac{k^{1+n}}{3 \left(k^{1+n} (-c+w)\right)^{2/3}} + \left(1+\sqrt{k}+\cdots+k^{n/2}\right)^{2/3} \frac{1}{3 c^{2/3}} =0\]
+\[ \Rightarrow -\frac{k^{1+n}}{ \left(k^{1+n} (-c+w)\right)^{2/3}} + \left(\frac{1+\sqrt{k}+\cdots+k^{n/2}}{c}\right)^{2/3} =0\]
+\[ \Rightarrow -\frac{k^{\frac{1}{3}(1+n)}}{ \left(w-c \right)^{2/3}} + \left(\frac{1+\sqrt{k}+\cdots+k^{n/2}}{c}\right)^{2/3} =0\]
+\[ \Rightarrow \frac{k^{\frac{1}{2}(1+n)}}{ w-c }  = \frac{1+\sqrt{k}+\cdots+k^{n/2}}{c}\]
+\[ \Rightarrow \frac{ w-c }{c}  = \frac{k^{\frac{1}{2}(1+n)}}{1+\sqrt{k}+\cdots+k^{n/2}} \]
+\[ \Rightarrow \frac{ w }{c}   = \frac{k^{\frac{1}{2}(1+n)}}{1+\sqrt{k}+\cdots+k^{n/2}} + \frac{1+\sqrt{k}+\cdots+k^{n/2}}{1+\sqrt{k}+\cdots+k^{n/2}} \]
+\[ \Rightarrow \frac{ w }{c}   =   \frac{1+\sqrt{k}+\cdots+k^{n/2}+ k^{(n+1)/2}}{1+\sqrt{k}+\cdots+k^{n/2}  } \]
+\[ \Rightarrow c   =  w\left(  \frac{1+\sqrt{k}+\cdots+k^{n/2}  }{1+\sqrt{k}+\cdots+k^{n/2}+ k^{(n+1)/2}} \right) \]
+This agrees with what we expect for $g_{n+1}(w)$. Finally we substitute to check $V_{n+1}(w)$
+\[ \left( (w-c)k^{n+1} \right)^{1/3} + \left(1+\sqrt{k}+\cdots+k^{n/2}\right)^{2/3} c^{1/3} \]
+\[= \left( \left(w-w\left(  \frac{1+\sqrt{k}+\cdots+k^{n/2}  }{1+\sqrt{k}+\cdots+k^{n/2}+ k^{(n+1)/2}} \right)\right)k^{n+1} \right)^{1/3} +\]
+\[ \left(1+\sqrt{k}+\cdots+k^{n/2}\right)^{2/3} w^{1/3} \left(  \frac{1+\sqrt{k}+\cdots+k^{n/2}  }{1+\sqrt{k}+\cdots+k^{n/2}+ k^{(n+1)/2}} \right)^{1/3} \]
+\[= \left( w \left(1-  \frac{1+\sqrt{k}+\cdots+k^{n/2}  }{1+\sqrt{k}+\cdots+k^{n/2}+ k^{(n+1)/2}}\right)k^{n+1} \right)^{1/3} +\]
+\[  w^{1/3}  \frac{1+\sqrt{k}+\cdots+k^{n/2}  }{\left(1+\sqrt{k}+\cdots+k^{n/2}+ k^{(n+1)/2}\right)^{1/3} }\]
+\[= \left( w \left(  \frac{1+\sqrt{k}+\cdots+k^{n/2}+ k^{(n+1)/2}}{1+\sqrt{k}+\cdots+k^{n/2}+ k^{(n+1)/2}}-  \frac{1+\sqrt{k}+\cdots+k^{n/2}  }{1+\sqrt{k}+\cdots+k^{n/2}+ k^{(n+1)/2}}\right)k^{n+1} \right)^{1/3} +\]
+\[  w^{1/3}  \frac{1+\sqrt{k}+\cdots+k^{n/2}  }{\left(1+\sqrt{k}+\cdots+k^{n/2}+ k^{(n+1)/2}\right)^{1/3} }\]
+\[= \left( w  \frac{k^{3(n+1)/2}}{1+\sqrt{k}+\cdots+k^{n/2}+ k^{(n+1)/2}} \right)^{1/3} + w^{1/3}  \frac{1+\sqrt{k}+\cdots+k^{n/2}  }{\left(1+\sqrt{k}+\cdots+k^{n/2}+ k^{(n+1)/2}\right)^{1/3} }\]
+\[= w^{1/3} \left(  \frac{1+\sqrt{k}+\cdots+k^{n/2} + k^{(n+1)/2} }{\left(1+\sqrt{k}+\cdots+k^{n/2}+ k^{(n+1)/2}\right)^{1/3} } \right) \]
+\[= w^{1/3} \left( {1+\sqrt{k}+\cdots+k^{n/2} + k^{(n+1)/2} } \right) ^{2/3} \]
+which agrees with our prediction for $V_{n+1}(w)$. Thus, we are done with the inductive step and we have confirmed that
+\[V_T(w) = \left(1+\sqrt{k}+\cdots+k^{T/2}\right)^{2/3} w^{1/3}\]
+and
+\[g_T(w) =w \left( \frac{1+\sqrt{k}+ \cdots +k^{(T-1)/2}}{1+\sqrt{k}+ \cdots +k^{T/2}} \right). \]
+\section{Problem 11.4}
+\subsection{Question}
+Determine the longest path from A to H in the network in the following figure. The arrows indicate which direction an edge can be traversed. 
+\[
+\xymatrix{
+&B \ar[r] ^8 \ar[rdd]_7 &D \ar[r]^4 \ar[rdd]_<<<<<<{10}&F \ar[rd]^6\\
+A \ar[ur]^5 \ar[dr]_6 &&&&H\\
+&C \ar[r]_6&E\ar[r]_4 \ar[uur]_<<<<<<9&G\ar[uu]_6 \ar[ur]_4
+}
+\]
+
+\subsection{Answer}
+This problem is small enough that it can be solved by brute force. Towards this we shall list all possible such paths and their lengths.
+\[\begin{array}{l|l|l}
+\mathrm{Path} & \mathrm{Length} & \mathrm{Sum} \\
+\hline
+A \to B \to D \to F \to H& 5+ 8+4+6 & 23 \\
+A \to B \to D \to G \to F \to H&5+8+10+6+6& 35\\
+A \to B \to D \to G \to H&5+8+ 10+4& 27\\
+A \to B \to E \to F \to H&5+ 7+9+6& 27\\
+A \to B \to E \to G \to F \to H&5+7+4+6+6 &28\\
+A \to B \to E \to G \to H&5+7+ 4+4&20 \\
+A \to C \to E \to F \to H&6+6+9+6&27\\
+A \to C \to E \to G \to F \to H&6+6+4+6+6&28\\
+A \to C \to E \to G \to H&6+6+4+4& 20\\
+\end{array}\]
+Now we can reorder these by total length.
+\[\begin{array}{l|l|l}
+\mathrm{Path} & \mathrm{Length} & \mathrm{Sum} \\
+\hline
+A \to B \to D \to G \to F \to H&5+8+10+6+6& 35\\
+A \to C \to E \to G \to F \to H&6+6+4+6+6&28\\
+A \to B \to E \to G \to F \to H&5+7+4+6+6 &28\\
+A \to C \to E \to F \to H&6+6+9+6&27\\
+A \to B \to D \to G \to H&5+8+ 10+4& 27\\
+A \to B \to E \to F \to H&5+ 7+9+6& 27\\
+A \to B \to D \to F \to H& 5+ 8+4+6 & 23 \\
+A \to C \to E \to G \to H&6+6+4+4& 20\\
+A \to B \to E \to G \to H&5+7+ 4+4&20 \\
+\end{array}\]
+In particular note that the path $A \to B \to D \to G \to F \to H$ has the maximum total length, with a length of $35$.
+\end{document}

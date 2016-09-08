@@ -1,0 +1,222 @@
+\documentclass[12pt]{article}
+\setlength\headheight{14.5pt}
+\title{Homework}
+\author{Frederick Robinson}
+\date{11 January 2010}
+\usepackage{amsfonts}
+\usepackage{fancyhdr}
+\usepackage{amsthm}
+\pagestyle{fancyplain}
+
+\begin{document}
+
+
+
+\lhead{Frederick Robinson}
+\rhead{Math 368: Optimization}
+
+   \maketitle
+
+\setcounter{tocdepth}{2} 
+
+\tableofcontents
+
+\section{Book Problems}
+
+\subsection{Problem 1.16}
+\subsubsection{Question}
+Find the supremum, infimum, maximum, and minimum of the set $X$ in each of the following cases:
+\begin{enumerate}
+  \item $X=\{x \in [0,1] \ |\ x$ is irrational$\}$.
+  \item $X = \{x\ |\ x=1/n, n=1,2,\dots\}$.
+  \item $X = \{x\ |\ x=1-1/n, n=1,2,\dots\}$.
+  \item $X= \{x \in [0,\pi]\ |\ \sin{x} > 1/2\}$.
+\end{enumerate}
+\subsubsection{Answer}
+\begin{enumerate}
+\item The supremum of $X$ is $1$, though it has no maximum. Similarly the infimum is $0$ though it has no minimum.
+\item The maximum and supremum are both $1$. The infimum is $0$, but there is no minimum.
+\item The minimum and infimum are both $0$. There is no maximum, but the supremum is $1$.
+\item The infimum is $\pi/6$ and the supremum is $5 \pi / 6$ however there is no minimum or maximum.
+\end{enumerate}
+\subsection{Problem 1.32}
+\subsubsection{Question}
+Let $A = \{1,1/2,1/3,\dots,1/n,\dots\} \cup \{0\}$. Is $A$ closed? Is it compact?
+\subsubsection{Answer}
+The set $A$ is closed because it contains all of its limit points. It is compact since it is bounded (by $0$, $1$), and by the Heine-Borel theorem closed, bounded sets in $\mathbb{R}^n$ are compact.
+\subsection{Problem 1.51}
+\subsubsection{Question}
+Let $f:\mathbb{R}_+ \to \mathbb{R}$ be defined by
+\[f(x)= \left\{ \begin{array} {cr} 0, & x=0 \\ x \sin{(1/x)}, & x \neq 0.\end{array} \right.\]
+Show that $f$ is continuous at $0$.
+\subsubsection{Answer}
+We need to show that given some $\delta$ there is always some corresponding $\epsilon$ so that each element $x \in B_\epsilon 0$ is mapped to $f(x) \in B_\delta f(x)= B_\delta 0 $. 
+
+This is easy though, for clearly setting $\epsilon = \delta/ 2$ yields the desired condition. The fact that the $\sin{z} \in [-1,1]$ implies that $f(x)=x \sin{(1/x)} \in [-x,x]$ for a given input $x$ which is all we need.
+\subsection{Problem 1.52}
+\subsubsection{Question}
+Let $D$ be the unit square $[0,1] \times [0,1]$ in $\mathbb{R}^2$. For $(s,t) \in D$, let $f(s,t)$ be defined by 
+\[f(s,0)=0, \quad  \textrm{for all } s\in[0,1].\]
+and for $t>0$,
+\[f(s,t)= \left\{ \begin{array} {cr} \frac{2s}{t} & s \in \left[ 0, \frac{t}{2} \right] \\ 2-\frac{2 s}{t} & s \in \left( \frac{t}{2} , t \right] \\ 0 & s \in \left( t, 1 \right] \end{array} \right.\]
+Show that $f$ is separately continuous, but not jointly continuous.
+\subsubsection{Answer}
+If $t=0$ then $f(s)$ is constant valued and therefore continuous. So set a $\bar{t} \in (0,1]$ we have \[f(s)= \left\{ \begin{array} {cr} \frac{2s}{\bar{t}} & s \in \left[ 0, \frac{\bar{t}}{2} \right] \\ 2-\frac{2 s}{\bar{t}} & s \in \left( \frac{\bar{t}}{2} ,\bar{ t} \right] \\ 0 & s \in \left( \bar{t}, 1 \right] \end{array} \right.\]
+In each of the intervals $[0,\bar{t}/2)$, $(\bar{t}/2,\bar{t})$ and $(\bar{t},1]$ the function $f(s)$ is continuous. In the first interval it is a constant multiple of a continuous function (the identity function) and is therefore continuous. In the second interval it is the sum of two continuous functions and is therefore continuous. On the third it is just constant valued and therefore continuous. 
+
+Now we check that the function is continuous at $\bar{t}/2$ and $\bar{t}$ but it is easy to verify that we have $\lim_{{s\to\bar{t}/2}^+}f(s)=\lim_{{s\to\bar{t}/2}^-}f(s)$ since $\frac{2}{\bar{t}} \frac{\bar{t}}{2}= 2- \frac{2}{\bar{t}} \frac{\bar{t}}{2}=1$. Similarly we verify that $\lim_{{s\to\bar{t}}^+}f(s)=\lim_{{s\to\bar{t}}^-}f(s)$ by checking that $2- \frac{2}{\bar{t}}\bar{t}=0$.
+
+So we know that $f(s,t)$ is separately continuous in $s$. Now we need to verify that it is separately continuous in $t$ and that it is not jointly continuous. 
+
+Towards this end fix an $\bar{s} \in [0,1]$. We have 
+\[f(t)= \left\{ \begin{array} {cr} \frac{2\bar{s}}{t} & \bar{s} \in \left[ 0, \frac{t}{2} \right] \\ 2-\frac{2 \bar{s}}{t} & \bar{s} \in \left( \frac{t}{2} , t \right] \\ 0 & \bar{s} \in \left( t, 1 \right] \end{array} \right.\]
+and $f(t)$ is continuous since $\frac{2\bar{s}}{t}$ and $2-\frac{2 \bar{s}}{t}$ are continuous everywhere but at $0$ and $0$ is continuous everywhere. Furthermore $f(t)$ is defined to be $0$ for $t=0$. Lastly we must check that the left and right limit of $f(t)$ are the same whenever it transitions between component functions
+
+Thus, we check that $\lim _{t \to \bar{s}^-}f(t) = \lim _{t \to \bar{s}^+}f(t)$ by computing $2-\frac{2\bar{s}}{\bar{s}}=0$, and check that 
+ $\lim _{t \to 2\bar{s}^-}f(t) = \lim _{t \to 2\bar{s}^+}f(t)$ by computing $\frac{2 \bar{s}}{2 \bar{s}}= 2- \frac{2 \bar{s}}{2 \bar{s}}$.
+ 
+Lastly, it remains to show that $f$ is not jointly continuous. This is easy though. Consider the sequence defined by $(s_n,t_n)= (1/n,1/n)$. The function evaluated on this sequence converges to $2$ yet, the limit of this sequence is $(0,0)$ and$f(0,0)=0$. Hence, the function $f$ is not jointly continuous.
+ 
+\subsection{Problem 1.57}
+\subsubsection{Question}
+Let $f: \mathbb{R}^2 \to \mathbb{R}$ be defined by $f(0,0)=0$, and for $(x,y) \neq (0,0)$.
+\[f(x,y)=\frac{x y (x^2-y^2)}{x^2+y^2}\]
+Show that the cross-partials $\partial^2f(x,y)/\partial x\partial y$ and $\partial^2f(x,y)/\partial y \partial x$ exist at all $(x,y) \in \mathbb{R}^2$, but that these partials are not continuous at $(0,0)$. Show also that
+\[\frac{\partial^2 f}{\partial x \partial y} (0,0) \neq \frac{\partial^2 f}{\partial y \partial x} (0,0).\]
+\subsubsection{Answer}
+We evaluate the cross-partials on $(x,y)$ to yield
+\[ \frac{\partial^2f(x,y)}{\partial x\partial y} = \frac{\partial^2f(x,y)}{\partial y \partial x} = \frac{x^6+9 x^4 y^2-9 x^2 y^4-y^6}{\left(x^2+y^2\right)^3} \]
+Furthermore, we observe that this value does not exist in the limit $(x,y) \to (0,0)$ since limiting along the line $y=0$ yields $1$ whereas limiting along the line $x=0$ yields $-1$.
+
+\subsection{Problem 1.63adf}
+\subsubsection{Question}
+Find the hessians $D^2 f$ of each of the following functions. Evaluate the hessians at the specified points, and examine if the hessian is positive definite, negative definite, positieve semidefinite, negative semidefinite, or indefinite: 
+
+\textbf{(a)} $f:\mathbb{R}^2 \to \mathbb{R}, f(x) = x_1^2 + \sqrt{x_2}$ at $x = (1,1)$.
+
+\textbf{(d)} $f:\mathbb{R}^3_+ \to \mathbb{R}, f(x) = \sqrt{x_1}+\sqrt{x_2}+\sqrt{x_3}$, at $x=(2,2,2)$
+
+\textbf{(f)} $f: \mathbb{R}^3_+ \to \mathbb{R}, f(x) = x_1x_2+ x_2 x_3+ x_3x_1$ at $x=(1,1,1)$
+\subsubsection{Answer}
+
+\textbf{(a)} $f:\mathbb{R}^2 \to \mathbb{R}, f(x) = x_1^2 + \sqrt{x_2}$ at $x = (1,1)$.
+\[\left(
+\begin{array}{lr}
+2 & 0 \\
+0 & -1/4 \\
+\end{array}
+\right)
+\]
+Positive definite\footnote{Thanks to Simon Martin for a correction}
+
+\textbf{(d)} $f:\mathbb{R}^3_+ \to \mathbb{R}, f(x) = \sqrt{x_1}+\sqrt{x_2}+\sqrt{x_3}$, at $x=(2,2,2)$
+\[\left(
+\begin{array}{lcr}
+-\frac{1}{4 x_1^{3/2}} & 0& 0 \\
+0& -\frac{1}{4 x_2^{3/2}} & 0 \\
+0 & 0& -\frac{1}{4 x_3^{3/2}} \\
+\end{array}
+\right)
+=
+\left(
+\begin{array}{lcr}
+-\frac{1}{8 \sqrt{2}} & 0& 0 \\
+0& -\frac{1}{8 \sqrt{2}} & 0 \\
+0 & 0& -\frac{1}{8 \sqrt{2}}\\
+\end{array}
+\right)
+\]
+Negative definite
+
+\textbf{(f)} $f: \mathbb{R}^3_+ \to \mathbb{R}, f(x) = x_1x_2+ x_2 x_3+ x_3x_1$ at $x=(1,1,1)$
+\[\left(
+\begin{array}{lcr}
+0 & 1& 1 \\
+1 & 0& 1 \\
+1 & 1& 0 \\
+\end{array}
+\right)\]
+Indefinite
+
+\subsection{Problem 2.3}
+\subsubsection{Question}
+Let $\mathcal{D} = [0,1]$. Describe the set $f(\mathcal{D})$ in each of the following cases, and identify sup $f(\mathcal{D})$ and inf $f(\mathcal{D})$. In which cases does $f$ attain its supremum? What about its infimum?
+\begin{enumerate}
+\item $f(x)=1+x$ for all $x \in \mathcal{D}$.
+\item $f(x) = 1$ if $x<1/2$, and $f(x)=2x$ otherwise.
+\item $f(x) = x$, if $x<1$, and $f(1) =2$.
+\item $f(0) = 1, f(1)=0$, and $f(x) =3x$ for $x \in (0,1)$.
+\end{enumerate}
+\subsubsection{Answer}
+\begin{enumerate}
+\item $f(\mathcal{D})$ is just $[1,2]$. The supremum is $2$ and the infimum is $1$. Both are attained.
+\item Same as previous.
+\item $f(\mathcal{D})$ is $[0,1) \cup \{2\}$. The infimum is $0$ and it is attained. The supremum is $2$ and it too is attained.
+\item $f(\mathcal{D})$ is $[0,3)$. The infimum is $0$ and is attained, whereas the supremum is $3$ and is not attained.
+\end{enumerate}
+
+
+\subsection{Problem 2.7}
+\subsubsection{Question}
+Give an example of a set $\mathcal{D} \subset \mathbb{R}$ and a continuous function $f:\mathcal{D} \to \mathbb{R}$ such that $f$ attains its maximum, but not a minimum on $\mathcal{D}$.
+\subsubsection{Answer}
+Let $f$ be the identity function $f(x)=x$ and $\mathcal{D} = (4,12]$. The image of $\mathcal{D}$ under $f$ is just $(4,12]$ and clearly this has a maximum (12) but no minimum.
+
+\subsection{Problem 3.5}
+\subsubsection{Question}
+Let $f:\mathbb{R}_+ \to \mathbb{R}$ be continuous on $\mathbb{R}_+$. Suppose that $f$ also satisfies the conditions that $f(0) = 1$ and $\lim_{x\to \infty} f(x)=0$. Show that $f$ must have a maximum on $\mathbb{R}_+$. What about a minimum?
+\subsubsection{Answer}
+Since $\lim_{x\to \infty} f(x)=0$ for any choice of $\epsilon >0$ there is some $M$ such that $f(x)<\epsilon\ \forall x > M$. So, pick $\epsilon = 1$. Since the interval $[0,M]$ is compact $f$ must attain its maximum on this interval. Moreover, the maximum of the function on this interval is the maximum of the entire function, since by construction $f(x)<1\ \forall x > M$ and the maximum of $f$ on $[0,M]$ is at least $1$ (for after all we have in particular that $f(0)=1$).
+
+The same cannot be said of a minimum. Consider the function given by $f(x)=1$ for $x \in [0,1)$ and by $f(x)=1/x$ for $x \in [1,\infty)$. Clearly this function is continuous, however it has no minimum since it is strictly decreasing (starting at $x=1$).
+\subsection{Problem 3.8}
+\subsubsection{Question}
+Use the Weierstrass Theorem to show that a solution exists to the expenditure minimization problem of subsection 2.3.2, as long as the utility function $u$ is continuous on $\mathbb{R}_+^n$ and the price vector $p$ satisfies $p\gg0$. What if one of these conditions fails?
+\subsubsection{Answer}
+Assuming that $u$ is continuous we can show that there exists some compact subset of the constraint set which contains the solution to the expenditure minimization problem. In particular given some set $x_0$ which produces the desired utility $\bar{u}$ the set of all vectors which cost at most $p\cdot x$ is closed bounded and contains the solution to the expenditure minimization problem. So, the intersection of this set and the constraint set is a closed, bounded set which contains the answer to the expenditure minimization problem
+
+Since we have identified a compact set in which the minimum of a continuous function must be located we know that the minimum of the function over the whole domain must be attained (in particular in this subset.)
+
+If we don't have continuity of $u$ the compact subset of the constraint set which we identified earlier may not actually be bounded, closed. If we did not have $p \gg 0 $ we would not have had a closed constraint set. 
+
+Either of these problems would have caused the proof to fail; it depends on pinning down the minimum in a set which lives in the intersection of a closed, and a closed and bounded set which must therefore itself be closed and bounded.
+
+
+\section{Supplemental Problems}
+
+\subsection{Problem 1.3}
+\subsubsection{Question}
+\textbf{(a)} Show that the set $S = \{ (x,y) \in \mathbb{R}^2 : -1<x<1\}$ is open.
+
+\textbf{(b)} Show that the set $S=\{ (x,y) \in \mathbb{R}^2 : x \leq 1, y\leq 0 \}$ is closed.
+\subsubsection{Answer}
+\textbf{(a)} The set in question is open because, given any $x \in S$ we know that there exists some $\epsilon>0$ such that $B_\epsilon x \subset S$ and this is just the definition of openness.
+
+\textbf{(b)} The only limit points of this set are $1$, and $0$. These points are contained in the set, so the set is closed.
+
+\subsection{Problem 3.1}
+\subsubsection{Question}
+Let $u(x,y) = x y$ and the expenditure be $E(x,y)= p_1 x +p_2 y$ with $p_1>0$ and $p_2>0$. Fix a $\bar{u}>0$. Let $X(\bar{u}) = \{ (x,y) \in \mathbb{R}_+^2 : u(x,y) \geq\bar{u} \}$. The objective is to show that $E$ has a minimum on $X(\bar{u})$. (Note that $X(\bar{u})$ is not compact.)
+
+\textbf{i.} Find a point $(x_0,y_0)$ in $X(\bar{u})$ and let $E_0 = E(x_0,y_0)$.
+
+\textbf{ii.} Why must the minimum of $E$ on $X(\bar{u})$ be contained in the set $\mathcal{B}(P,E_0)$ (using the notation of Section 2.3.1)?
+
+\textbf{iii.} Why must $E$ attain a minimum on $X(\bar{u}) \cap \mathcal{B}(p,E_0)$?
+
+\textbf{iv.} Using reasoning like for problem 3.4:5, explain why $E$ attains a minimum on $X(\bar{u})$.
+
+
+
+\subsubsection{Answer}
+\textbf{i.}  For the point $(x_0,y_0) = (1,\bar{u})$ we have $u(1,\bar{u})=\bar{u}$. $E_0$ in this instance is just $E_0=p_1+p_2 \bar{u}$
+
+\textbf{ii.}  Since we have demonstrated a particular way to meet the goal utility of $\bar{u}$ it follows that the expenditure minimizing way of meeting this goal costs this much or less. That is, since $(x_0,y_0)$ has the property $u(x_0,y_0) \geq \bar{u}$ we must have that $E(x_0,y_0)$ is an upper bound for $E(x_{opt},y_{opt})$.
+
+\textbf{iii.}  $X(\bar{u})$ and $ \mathcal{B}(p,E_0)$ are both closed, so their intersection is also closed. Moreover the set  $ \mathcal{B}(p,E_0)$  is bounded. Thus, $E$ attains a minimum on  $X(\bar{u}) \cap \mathcal{B}(p,E_0)$ because this intersection is compact and $E$ is continuous. 
+
+\textbf{iv.} We have discovered that the minimum of $E$ must lie in a compact subset of $E$. Thus, $E$ being continuous implies that the minimum is always attained. 
+
+
+
+\end{document}
